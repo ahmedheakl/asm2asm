@@ -1,13 +1,18 @@
+import os
+import glob
 from tqdm import tqdm
+
+from dotenv import load_dotenv
 import datasets
 import random
+
 from compile_arm_clang import compile as compile_arm_clang
 from compile_x86_clang import compile as compile_x86_clang
-import glob
 
 DATA_ROOT = "data"
 MAX_FILES = 100
 HF_ID = f"ahmedheakl/asm2asm_{MAX_FILES}"
+load_dotenv()
 
 
 def get_files(dir: str):
@@ -30,7 +35,7 @@ def main():
         "arm": [open(path).read() for path in paths_arm],
     }
     dataset = datasets.Dataset.from_dict(compilations)
-    dataset.push_to_hub(HF_ID, token="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")
+    dataset.push_to_hub(HF_ID, token=os.getenv("HF_TOKEN"))
 
 
 if __name__ == "__main__":
