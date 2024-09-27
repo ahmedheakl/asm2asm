@@ -1,4 +1,3 @@
-bitsandbytes
-accelerate
-peft
-trl
+streamlit
+st-annotated-text
+datasets

@@ -1,0 +1,7 @@
+bitsandbytes
+accelerate
+peft
+trl
+sentencepiece
+protobuf
+wandb

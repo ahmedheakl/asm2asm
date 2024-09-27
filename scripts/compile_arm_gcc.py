@@ -6,7 +6,7 @@ import argparse
 OPT = ["O0", "O1", "O2", "O3"]  # Optimization states
 
 
-def compile(input_file, optimization_level="O0"):
+def compile(input_file, optimization_level="O0") -> str:
     base_output_file = input_file.replace(".c", "")
     assert (
         optimization_level in OPT
@@ -20,12 +20,21 @@ def compile(input_file, optimization_level="O0"):
         input_text = input_text.replace("__attribute__((used)) ", "")
         ##### end of remove __attribute__
     try:
-        asm_output = base_output_file + "_" + optimization_level + ".s"
+        asm_output = (
+            base_output_file
+            + "_"
+            + optimization_level
+            + "_"
+            + "arm"
+            + "_"
+            + "clang"
+            + ".s"
+        )
         subprocess.run(
             [
-                "gcc",
+                "aarch64-linux-gnu-gcc",
+                "-I/usr/local/include/",
                 "-S",
-                "-masm=intel",
                 input_file,
                 "-o",
                 asm_output,

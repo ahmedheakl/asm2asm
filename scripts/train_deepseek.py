@@ -12,8 +12,8 @@ hf_token = "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"
 
 login(token=hf_token)
 
-model_name = "01-ai/Yi-Coder-1.5B-Chat"
-new_model = "asm2asm-yi-1.5b-100k-float16"
+model_name = "deepseek-ai/deepseek-coder-1.3b-instruct"
+new_model = "asm2asm-deepseek-1.3b-100k-float16-attn"
 
 output_dir = new_model
 num_train_epochs = 1
@@ -38,15 +38,13 @@ packing = False
 device_map = "auto"
 
 
-instruction = """<|im_start|>system
-You are a helpful coding assistant assistant on converting from x86 to ARM assembly.<|im_end|>
-<|im_start|>user
+instruction = """<｜begin▁of▁sentence｜>You are a helpful coding assistant assistant on converting from x86 to ARM assembly.
+### Instruction:
 Convert this x86 assembly into ARM
 ```asm
 {asm_x86}
 ```
-<|im_end|>
-<|im_start|>assistant
+### Response:
 ```asm
 {asm_arm}
 """
@@ -63,7 +61,10 @@ model.config.use_cache = False
 model.config.pretraining_tp = 1
 
 tokenizer = AutoTokenizer.from_pretrained(
-    model_name, trust_remote_code=True, token=hf_token
+    model_name, 
+    trust_remote_code=True, 
+    token=hf_token, 
+    attn_implementation="flash_attention_2",
 )
 tokenizer.padding_side = "right"
 
@@ -117,7 +118,7 @@ training_arguments = TrainingArguments(
     save_total_limit=save_total_limit,
 )
 
-response_template = "```asm\n"
+response_template = "### Response:\n```asm\n"
 collator = DataCollatorForCompletionOnlyLM(response_template, tokenizer=tokenizer)
 
 trainer = SFTTrainer(
@@ -133,3 +134,4 @@ trainer = SFTTrainer(
 
 trainer.train()
 trainer.push_to_hub(f"ahmedheakl/{output_dir}")
+
