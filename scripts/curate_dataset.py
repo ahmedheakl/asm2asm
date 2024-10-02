@@ -14,9 +14,10 @@ from compile_x86_gcc import compile as compile_x86
 from compile_arm_gnueabi_gcc import compile as compile_arm
 
 DATA_ROOT = "data"
-MAX_FILES = 100_000
+MAX_FILES = 150_000
 OPTIMIZATION_LEVEL = "O0"
-HF_ID = f"ahmedheakl/asm2asm_{OPTIMIZATION_LEVEL}_{MAX_FILES}_gnueabi_gcc"
+OPTIMIZATION_PERCENTAGE = 0.1
+HF_ID = f"ahmedheakl/asm2asm_omix_{MAX_FILES}_gnueabi_gcc"
 load_dotenv()
 
 
@@ -25,8 +26,9 @@ def get_files(dir: str):
 
 
 def compile_file(file):
-    path_arm = compile_arm(file, optimization_level=OPTIMIZATION_LEVEL)
-    path_x86 = compile_x86(file, optimization_level=OPTIMIZATION_LEVEL)
+    optimization_level = "O2" if random.random() <= OPTIMIZATION_PERCENTAGE else "O0"
+    path_arm = compile_arm(file, optimization_level=optimization_level)
+    path_x86 = compile_x86(file, optimization_level=optimization_level)
     if path_arm is not None and path_x86 is not None:
         return path_arm, path_x86
     return None
