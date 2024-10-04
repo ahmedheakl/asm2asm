@@ -5,6 +5,7 @@ from pygments import highlight
 from pygments.lexers import DiffLexer, CLexer, NasmLexer
 from pygments.formatters import HtmlFormatter
 import re
+import uuid
 
 def load_data(uploaded_file):
     if uploaded_file is not None:
@@ -90,6 +91,63 @@ def display_diff(gt, pred):
         unsafe_allow_html=True,
     )
 
+def side_by_side_diff(gt, pred):
+    gt_lines = gt.splitlines()
+    pred_lines = pred.splitlines()
+    
+    differ = difflib.Differ()
+    diff = list(differ.compare(pred_lines, gt_lines))
+    
+    gt_formatted = []
+    pred_formatted = []
+    
+    for line in diff:
+        if line.startswith('  '):  # unchanged
+            gt_formatted.append(f'<span>{line[2:]}</span>')
+            pred_formatted.append(f'<span>{line[2:]}</span>')
+        elif line.startswith('- '):  # in pred, not in gt
+            pred_formatted.append(f'<span style="background-color: #ffeef0;">{line[2:]}</span>')
+            gt_formatted.append('<span>&nbsp;</span>')
+        elif line.startswith('+ '):  # in gt, not in pred
+            gt_formatted.append(f'<span style="background-color: #e6ffed;">{line[2:]}</span>')
+            pred_formatted.append('<span>&nbsp;</span>')
+    
+    return gt_formatted, pred_formatted
+
+def display_side_by_side(gt, pred):
+    gt_formatted, pred_formatted = side_by_side_diff(gt, pred)
+    
+    st.markdown(
+        f"""
+        <style>
+        .diff-container {{
+            display: flex;
+            font-family: 'Courier New', monospace;
+        }}
+        .diff-column {{
+            flex: 1;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            margin: 5px;
+            white-space: pre-wrap;
+        }}
+        </style>
+        <div class="diff-container">
+            <div class="diff-column">
+                <h4>Ground Truth</h4>
+                {'<br>'.join(gt_formatted)}
+            </div>
+            <div class="diff-column">
+                <h4>Predicted</h4>
+                {'<br>'.join(pred_formatted)}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 def main():
     st.set_page_config(layout="wide", page_title="x86 to ARM Assembly Converter", page_icon="🔄")
     
@@ -107,9 +165,6 @@ def main():
         .stExpander > div > div > div > div {
             background-color: #f8f8f8;
         }
-        /* Remove or comment out these lines to show the main menu and footer */
-        /* #MainMenu {visibility: hidden;} */
-        /* footer {visibility: hidden;} */
         </style>
         """,
         unsafe_allow_html=True,
@@ -154,6 +209,7 @@ def main():
                 # Display problem number and edit distance on the same line
                 problem_number = problem['file'].split('/')[-2].lstrip('problem')
                 st.markdown(f"<h2>Problem {problem_number} <span style='float: right;'>Edit Distance: {problem['ed']}</span></h2>", unsafe_allow_html=True)
+                
                 with st.expander("C Code", expanded=False):
                     display_highlighted_code(problem['c_code'], CLexer())
                 
@@ -167,11 +223,16 @@ def main():
                 
                 st.subheader("ARM Assembly")
                 if category == "Correct (ED = 0)":
-                    # For ED=0, show ground truth ARM assembly
-                    display_highlighted_code(problem['gt'], NasmLexer())
+                    # For ED=0, show ground truth ARM assembly in a clickable expander
+                    with st.expander("Show Ground Truth ARM Assembly", expanded=False):
+                        display_highlighted_code(problem['gt'], NasmLexer())
                 else:
-                    # For ED>0 and Incorrect, show diff
-                    display_diff(problem['gt'], problem['pred'])
+                    # For ED>0 and Incorrect, show diff and side-by-side comparison
+                    with st.expander("Show Difference", expanded=False):
+                        display_diff(problem['pred'], problem['gt'])
+                    
+                    with st.expander("Side-by-Side Comparison", expanded=False):
+                        display_side_by_side(problem['gt'], problem['pred'])
             else:
                 st.info(f"No problems in the '{category}' category.")
         else:
