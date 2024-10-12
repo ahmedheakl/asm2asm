@@ -1,5 +1,6 @@
 import os
 import glob
+import json
 from tqdm import tqdm
 import multiprocessing as mp
 
@@ -14,10 +15,10 @@ from compile_x86_gcc import compile as compile_x86
 from compile_arm_gnueabi_gcc import compile as compile_arm
 
 DATA_ROOT = "data"
-MAX_FILES = 150_000
+MAX_FILES = 500_000
 OPTIMIZATION_LEVEL = "O0"
 OPTIMIZATION_PERCENTAGE = 0.1
-HF_ID = f"ahmedheakl/asm2asm_omix_{MAX_FILES}_gnueabi_gcc"
+HF_ID = f"ahmedheakl/asm2asm_Omix_{MAX_FILES}_gnueabi_gcc"
 load_dotenv()
 
 
