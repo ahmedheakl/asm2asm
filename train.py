@@ -6,11 +6,7 @@ from transformers import (
     TrainingArguments,
 )
 from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
-from huggingface_hub import login
 
-hf_token = "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"
-
-login(token=hf_token)
 
 model_name = "01-ai/Yi-Coder-1.5B-Chat"
 new_model = "asm2asm-yi-1.5b-100k-x86-arm-gnueabi-gcc"
