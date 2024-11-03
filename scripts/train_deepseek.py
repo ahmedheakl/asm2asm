@@ -6,11 +6,6 @@ from transformers import (
     TrainingArguments,
 )
 from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
-from huggingface_hub import login
-
-hf_token = "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"
-
-login(token=hf_token)
 
 model_name = "deepseek-ai/deepseek-coder-1.3b-instruct"
 new_model = "asm2asm-deepseek-1.3b-100k-float16-attn"
