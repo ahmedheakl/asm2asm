@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="From CISC to RISC: Language-Model Guided Assembly Transpilation">
+    <meta name="keywords" content="CRT, Transpiler, LMM">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>From CISC to RISC: Language-Model Guided Assembly Transpilation</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./static/css/leaderboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/icon3.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #content-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        #pie-chart {
+            width: 400px;
+            height: 400px;
+        }
+        #image-container {
+            width: 100%;
+            height: 400px;
+        }
+        #image-container img {
+            max-width: 80%;
+            height: auto;
+        }
+        .chart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+        .bar-chart {
+            width: 400px;
+            height: 300px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title is-bold">
+                            <span class="mmmu" style="vertical-align: middle">From CISC to RISC:</span>
+                        </h1>
+                        <h2 class="subtitle is-3 publication-subtitle">
+                            Language-Model Guided Assembly Transpilation
+                        </h2>
+        <div class="is-size-5 publication-authors">               
+        <p>
+            Ahmed Heakl<sup style="color:#3399FF;">1*</sup>, 
+            Chaimaa Abi<sup style="color:#3399FF;">1*</sup>, 
+            Rania Hossam<sup style="color:#3399FF;">1</sup>, 
+            Abdulrahman Mahmoud<sup style="color:#3399FF;">1</sup>, 
+        </p>
+        <p><em>* Equal Contributions</em></p>
+        <p>
+            <sup style="color:#3399FF;">1</sup>Mohamed bin Zayed University of AI, 
+        </p>
+        </div>
+                        
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <!-- <span class="link-block">
+                                    <a href="https://arxiv.org/pdf/2410.18976"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2410.18976"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span> -->
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/ahmedheakl/asm2asm"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/collections/ahmedheakl/cisc-to-risc-672727bd996db985473d146e"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon" style="font-size:18px">🤗</span>
+                                        <span>Datasets</span>
+                                    </a>
+                                </span>
+                                <!-- Models Link. -->
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/collections/ahmedheakl/cisc-to-risc-672727bd996db985473d146e" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <p style="font-size:18px">🏆</p>
+                                        </span>
+                                        <span>Models</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero teaser">
+        <div class="container is-max-desktop has-text-centered">
+            <img src="static/images/eval-samples-figure.png" alt="geometric reasoning">
+            <p><i>The proposed CAMEL-Bench covers eight diverse and challenging domains: multimodal understanding and
+                    reasoning, OCR and document understanding,
+                    chart and diagram understanding, video understanding,
+                    cultural-specific understanding, medical imaging understanding, agricultural image understanding,
+                    and remote
+                    sensing understanding in Arabic. CAMEL-Bench covers 38 sub-domains with over <b>29K</b> questions
+                    carefully
+                    curated by native Arabic speakers to rigorously evaluate
+                    essential skills desired in Arabic LMMs.</i>
+            </p>
+        </div>
+    </section>
+
+
+ <section class="section">
+    <div class="container is-max-desktop">
+        <!-- News -->
+        <div class="columns is-centered">
+            <div class="column is-full has-text-centered">
+                <h2 class="title is-3" style="display: inline-flex; align-items: center; justify-content: center;">
+                    <span class="icon" style="margin-right: 8px;">
+                        <img src="static/images/bell.png" alt="News Icon" style="width: 24px; height: 24px;">
+                    </span>
+                    News
+                </h2>
+                <p style="font-size: 18px;">
+                    <strong>[2024-10-24]</strong>: Our CAMEL-Bench is now available on <a href="https://huggingface.co/collections/ahmedheakl/camel-bench-670750f3998395452cd3b7b1">HuggingFace</a>. We welcome all contributions and look forward to your participation!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+            
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Recent years have witnessed a significant interest in developing large multi-modal models
+                            (LMMs)
+                            capable of performing various visual reasoning and understanding tasks. This has led to the
+                            introduction
+                            of multiple LMM benchmarks to evaluate LMMs on different tasks. However, most existing LMM
+                            evaluation
+                            benchmarks are predominantly English-centric. In this work, we develop a comprehensive LMM
+                            evaluation
+                            benchmark for the Arabic language to represent a large population of over 400 million
+                            speakers.
+                        </p>
+                        <p>
+                            The proposed benchmark, named CAMEL-Bench, comprises eight diverse domains and 38
+                            sub-domains including,
+                            multi-image understanding, complex visual perception, handwritten document understanding,
+                            video understanding,
+                            medical imaging, plant diseases, and remote sensing-based land use understanding to evaluate
+                            broad scenario generalizability.
+                            Our CAMEL-Bench comprises around 29,036 questions that are filtered from a larger pool of
+                            samples, where the quality is
+                            manually verified by native speakers to ensure reliable model assessment. We conduct
+                            evaluations of both closed-source,
+                            including GPT-4 series, and open-source LMMs. Our analysis reveals the need for substantial
+                            improvement, especially among
+                            the best open-source models, with even the closed-source GPT-4o achieving an overall score
+                            of 62%. Our benchmark will be publicly released.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+    </section>
+
+    
+
+
+    <footer class="footer">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a
+                            href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
+                            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                            Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
