@@ -208,32 +208,22 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Recent years have witnessed a significant interest in developing large multi-modal models
-                            (LMMs)
-                            capable of performing various visual reasoning and understanding tasks. This has led to the
-                            introduction
-                            of multiple LMM benchmarks to evaluate LMMs on different tasks. However, most existing LMM
-                            evaluation
-                            benchmarks are predominantly English-centric. In this work, we develop a comprehensive LMM
-                            evaluation
-                            benchmark for the Arabic language to represent a large population of over 400 million
-                            speakers.
+                            The transition from x86 to ARM architecture is becoming increasingly common across various domains, 
+                            primarily driven by ARM's energy efficiency and improved performance across traditional sectors. 
+                            However, this ISA shift poses significant challenges, mainly due to the extensive legacy ecosystem 
+                            of x86 software, and lack of portability across proprietary ecosystems and software stacks. 
+                            This paper introduces CRT, a lightweight LLM-based transpiler that automatically converts x86 assembly 
+                            to ARM assembly. Our approach bridges the fundamental architectural gap between x86's CISC-based and 
+                            ARM's RISC-based computing paradigms while preserving program semantics and optimizing performance.
                         </p>
                         <p>
-                            The proposed benchmark, named CAMEL-Bench, comprises eight diverse domains and 38
-                            sub-domains including,
-                            multi-image understanding, complex visual perception, handwritten document understanding,
-                            video understanding,
-                            medical imaging, plant diseases, and remote sensing-based land use understanding to evaluate
-                            broad scenario generalizability.
-                            Our CAMEL-Bench comprises around 29,036 questions that are filtered from a larger pool of
-                            samples, where the quality is
-                            manually verified by native speakers to ensure reliable model assessment. We conduct
-                            evaluations of both closed-source,
-                            including GPT-4 series, and open-source LMMs. Our analysis reveals the need for substantial
-                            improvement, especially among
-                            the best open-source models, with even the closed-source GPT-4o achieving an overall score
-                            of 62%. Our benchmark will be publicly released.
+                            We evaluate CRT on diverse real-world applications, achieving 79.25% translation accuracy from x86 to 
+                            ARMv5 on our comprehensive test suite, and a 88.68\% accuracy from x86 to RISC-V. In practical deployments 
+                            on Apple M2 hardware (ARMv8), our transpiled code achieves 1.73x speedup compared to Apple's Rosetta 2 
+                            virtualization engine, while delivering 2.41x memory efficiency and 1.47x better energy consumption.  
+                            Through testing and analysis, we show that CRT successfully navigates the CISC/RISC divide, and generates 
+                            correctly executable RISC code despite machine ``language" barriers. We plan to release our codes, models, 
+                            training dataset, and benchmark as open-source.
                         </p>
                     </div>
                 </div>
