@@ -12,7 +12,7 @@ def compile(input_file, optimization_level="O0"):
     assert (
         optimization_level in OPT
     ), f"Invalid optimization level: {optimization_level}"
-    asm_output = base_output_file + "_" + optimization_level + ".s"
+    asm_output = base_output_file + "_" + optimization_level + "_risc" + ".s"
     # if os.path.exists(asm_output):
     #     return asm_output
     input_text = open(input_file).read()  # Read input file
@@ -24,11 +24,11 @@ def compile(input_file, optimization_level="O0"):
         input_text = input_text.replace("__attribute__((used)) ", "")
         ##### end of remove __attribute__
     try:
+
         subprocess.run(
             [
-                "gcc",
+                "riscv64-linux-gnu-gcc",
                 "-S",
-                "-masm=intel",
                 input_file,
                 "-o",
                 asm_output,

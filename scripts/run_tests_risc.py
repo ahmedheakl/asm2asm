@@ -37,26 +37,28 @@ def process_test(data):
         f.write(pred)
 
     out_path = pred_path.replace(".s", ".o")
-    success, output = run_command(f"arm-linux-gnueabi-as {pred_path} -o {out_path}")
+    success, output = run_command(f"riscv64-linux-gnu-gcc -c {pred_path} -o {out_path}")
     if not success:
         return f"Failed to assemble {file}: {output}", file
 
     test_path = file.replace("code.c", "test.c")
     test_out_path = test_path.replace(".c", ".o")
     success, output = run_command(
-        f"arm-linux-gnueabi-gcc -c {test_path} -o {test_out_path}"
+        f"riscv64-linux-gnu-gcc -c {test_path} -o {test_out_path}"
     )
     if not success:
         return f"Failed to compile test for {file}: {output}", file
 
     linked_path = pred_path.replace(".s", "")
     success, output = run_command(
-        f"arm-linux-gnueabi-gcc {out_path} {test_out_path} -o {linked_path}"
+        f"riscv64-linux-gnu-gcc {out_path} {test_out_path} -o {linked_path}"
     )
     if not success:
         return f"Failed to link {file}: {output}", file
 
-    success, output = run_command(f"qemu-arm -L /usr/arm-linux-gnueabi {linked_path}")
+    success, output = run_command(
+        f"qemu-riscv64 -L /usr/riscv64-linux-gnu {linked_path}"
+    )
     if not success:
         return f"Test failed for {file}: {output}", file
 
@@ -64,7 +66,7 @@ def process_test(data):
 
 
 if __name__ == "__main__":
-    results_path = "results/eval_deepseek_O0_500k_2ep_2b_toknizer_int8.json"
+    results_path = "results/eval_deepseek_risc_500k_2ep_8b_weirdtokenizer_int4.json"
 
     with open(results_path, "r") as f:
         data = json.load(f)
@@ -106,8 +108,8 @@ if __name__ == "__main__":
             }
         )
 
-    with open(f"results/evaluated_{results_path.split('/')[-1]}", "w") as f:
-        json.dump(evaluated_files, f)
+    # with open(f"results/evaluated_{results_path.split('/')[-1]}", "w") as f:
+    #     json.dump(evaluated_files, f)
     accuracy = (successful / total_tests) * 100
     print(
         f"Tests completed. Successful: {successful}, Failed: {failed}, Total: {total_tests}"
