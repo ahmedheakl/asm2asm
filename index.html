@@ -150,7 +150,7 @@
                                 <span class="link-block">
                                     <a href="https://huggingface.co/collections/ahmedheakl/cisc-to-risc-672727bd996db985473d146e" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
-                                            <p style="font-size:18px">🏆</p>
+                                            <p style="font-size:18px">🤗</p>
                                         </span>
                                         <span>Models</span>
                                     </a>
@@ -194,37 +194,87 @@
     </div>
 </section>
             
-    <section class="section">
-        <div class="container is-max-desktop">
-            <!-- Abstract. -->
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-3">Abstract</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            The transition from x86 to ARM architecture is becoming increasingly common across various domains, 
-                            primarily driven by ARM's energy efficiency and improved performance across traditional sectors. 
-                            However, this ISA shift poses significant challenges, mainly due to the extensive legacy ecosystem 
-                            of x86 software, and lack of portability across proprietary ecosystems and software stacks. 
-                            This paper introduces CRT, a lightweight LLM-based transpiler that automatically converts x86 assembly 
-                            to ARM assembly. Our approach bridges the fundamental architectural gap between x86's CISC-based and 
-                            ARM's RISC-based computing paradigms while preserving program semantics and optimizing performance.
-                        </p>
-                        <p>
-                            We evaluate CRT on diverse real-world applications, achieving 79.25% translation accuracy from x86 to 
-                            ARMv5 on our comprehensive test suite, and a 88.68\% accuracy from x86 to RISC-V. In practical deployments 
-                            on Apple M2 hardware (ARMv8), our transpiled code achieves 1.73x speedup compared to Apple's Rosetta 2 
-                            virtualization engine, while delivering 2.41x memory efficiency and 1.47x better energy consumption.  
-                            Through testing and analysis, we show that CRT successfully navigates the CISC/RISC divide, and generates 
-                            correctly executable RISC code despite machine ``language" barriers. We plan to release our codes, models, 
-                            training dataset, and benchmark as open-source.
-                        </p>
-                    </div>
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        The transition from x86 to ARM architecture is becoming increasingly common across various domains, 
+                        primarily driven by ARM's energy efficiency and improved performance across traditional sectors. 
+                        However, this ISA shift poses significant challenges, mainly due to the extensive legacy ecosystem 
+                        of x86 software, and lack of portability across proprietary ecosystems and software stacks. 
+                        This paper introduces CRT, a lightweight LLM-based transpiler that automatically converts x86 assembly 
+                        to ARM assembly. Our approach bridges the fundamental architectural gap between x86's CISC-based and 
+                        ARM's RISC-based computing paradigms while preserving program semantics and optimizing performance.
+                    </p>
+                    <p>
+                        We evaluate CRT on diverse real-world applications, achieving 79.25% translation accuracy from x86 to 
+                        ARMv5 on our comprehensive test suite, and a 88.68% accuracy from x86 to RISC-V. In practical deployments 
+                        on Apple M2 hardware (ARMv8), our transpiled code achieves 1.73x speedup compared to Apple's Rosetta 2 
+                        virtualization engine, while delivering 2.41x memory efficiency and 1.47x better energy consumption.  
+                        Through testing and analysis, we show that CRT successfully navigates the CISC/RISC divide, and generates 
+                        correctly executable RISC code despite machine ``language" barriers. We plan to release our codes, models, 
+                        training dataset, and benchmark as open-source.
+                    </p>
                 </div>
             </div>
-            <!--/ Abstract. -->
+        </div>
+        <!--/ Abstract. -->
 
-    </section>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Results and Analysis</h2>
+                <div class="content has-text-justified">
+                    <table>
+                        <tr>
+                            <th>Input</th>
+                            <td colspan="2">ldr r1, r2</td>
+                        </tr>
+                        <tr>
+                            <th>Tokenizer</th>
+                            <th>Tokens</th>
+                        </tr>
+                        <tr>
+                            <td>DeepSeek/Yi-Coder</td>
+                            <td>
+                                <span class="token token-l">ld</span>
+                                <span class="token token-d">r</span>
+                                <span class="token token-space">␣</span>
+                                <span class="token token-r1">r1</span>
+                                <span class="token token-comma">,</span>
+                                <span class="token token-space">␣</span>
+                                <span class="token token-r2">r2</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Our Extended Tokenizer</td>
+                            <td>
+                                <span class="token token-l">ldr</span>
+                                <span class="token token-space">␣</span>
+                                <span class="token token-r1">r1</span>
+                                <span class="token token-comma">,</span>
+                                <span class="token token-space">␣</span>
+                                <span class="token token-r2">r2</span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <caption>Table 1. Comparison of tokenization approaches between DeepSeek/Yi-Coder and our extended tokenizer. Spaces are represented as ␣ and shown with colored backgrounds to highlight token boundaries. Note how our tokenizer groups related tokens (e.g., ldr and r1) as singular units.</caption>
+                    
+                </div>
+            </div>
+        </div>
+        <!--/ Abstract. -->
+
+</section>
 
     
 
