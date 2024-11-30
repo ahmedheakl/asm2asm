@@ -147,7 +147,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Citation
 If you use CRT in your research, please consider citing:
-```
+```bibtex
 @article{heakl2024cisc,
   title={From CISC to RISC: language-model guided assembly transpilation},
   author={Heakl, Ahmed and Abi, Chaimaa and Hossam, Rania and Mahmoud, Abdulrahman},
