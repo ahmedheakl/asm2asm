@@ -1,4 +1,8 @@
 # CRT: Language-Model Guided Assembly Transpilation
+[![arXiv](https://img.shields.io/badge/arXiv-2411.16341-red)](https://arxiv.org/abs/2411.16341)
+[![HuggingFace Models](https://img.shields.io/badge/HuggingFace-Model%20Hub-blue)](https://huggingface.co/collections/ahmedheakl/cisc-to-risc-672727bd996db985473d146e)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-success)](https://ahmedheakl.github.io/asm2asm/)
+
 
 **From CISC to RISC: Language-Model Guided Assembly Transpilation**  
 Authors: Ahmed Heakl, Chaimaa Abi, Rania Hossam, Abdulrahman Mahmoud
@@ -140,3 +144,14 @@ We welcome contributions! If you're interested in improving CRT or expanding it 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Citation
+If you use CRT in your research, please consider citing:
+```
+@article{heakl2024cisc,
+  title={From CISC to RISC: language-model guided assembly transpilation},
+  author={Heakl, Ahmed and Abi, Chaimaa and Hossam, Rania and Mahmoud, Abdulrahman},
+  journal={arXiv preprint arXiv:2411.16341},
+  year={2024}
+}
+```
