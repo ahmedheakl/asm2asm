@@ -5,8 +5,10 @@ from transformers import (
     AutoTokenizer,
 )
 from huggingface_hub import login
+from dotenv import load_dotenv
+load_dotenv()
 
-hf_token = "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"
+hf_token = os.getenv("HF_TOKEN")
 
 login(token=hf_token)
 
